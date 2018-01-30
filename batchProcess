@@ -1,0 +1,32 @@
+#include "opencv2/opencv.hpp"  
+#include "iostream"  
+#include <fstream>  
+using namespace std;
+using namespace cv;
+
+int main()
+{
+	Mat image;
+	string ImgName;
+	ifstream fin("picture.txt");//打开原始样本图片文件列表  
+	while (getline(fin, ImgName)) //一行一行读取文件列表  
+	{
+		cout << "处理：" << ImgName << endl;
+		ImgName = "C:/Users/User/Desktop/黄色/丁字路口（右）/" + ImgName + ".jpg";
+		image = imread(ImgName);//读取图片  
+
+		if (image.data == 0)
+		{
+			printf("[error] 没有图片\n"); return -1;
+		}
+		Mat result;
+		cvtColor(image, result, CV_BGR2GRAY);
+		
+		const  CvArr* s = (CvArr*)&result;
+		const char* resultName = ImgName.c_str();
+		cvSaveImage(resultName,s);	
+
+	}
+	waitKey(25);
+	return 0;
+}
