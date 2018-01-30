@@ -1,0 +1,35 @@
+#include "opencv2/opencv.hpp"  
+#include "iostream"  
+#include <fstream>  
+using namespace std;
+using namespace cv;
+
+int main()
+{
+	ifstream file("C:/Users/User/Desktop/1/neg/picture.txt");
+
+	int img_index = 0;
+
+	while (!file.eof())
+	{
+		char txt_cont[200];
+		file.getline(txt_cont, 200);
+
+		char img_file[200], save_file[200];
+
+		sprintf(img_file, "C:/Users/User/Desktop/1/neg/%s.bmp", txt_cont);
+		sprintf(save_file, "C:/Users/User/Desktop/1/%d.bmp", img_index);
+
+		Mat src = imread(img_file);
+		Mat result;
+		cvtColor(src, result, CV_BGR2GRAY);
+		img_index++;
+
+		imwrite(save_file, result);
+
+		//src.release();
+		//result.release();
+	}
+	
+	return 0;
+}
