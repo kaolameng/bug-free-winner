@@ -1,0 +1,41 @@
+#include<fstream>
+#include <string>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <windows.h>  
+#include <time.h>
+
+using namespace std;
+
+
+
+ifstream infile("D:\\节点分配\\9.txt");
+
+vector<string> a;
+
+
+int main()
+{
+	string sd;
+	while (infile)
+	{
+		infile >> sd;
+		a.push_back(sd);
+	}
+	infile.close();
+
+	a.pop_back();
+	
+	string result_dir = "D:\\节点分配\\9";
+
+	for (int i = 0; i < a.size(); i++)
+	{
+		string command1 = "move " + a[i] + " "+result_dir;
+		const char* c_s1 = command1.c_str();
+
+		system(c_s1);
+	}
+	cout << "finash"<< endl;	
+	getchar();
+}
